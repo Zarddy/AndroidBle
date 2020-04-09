@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_is_support_ble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否支持蓝牙"
+            android:onClick="onClick"/>
+
+        <Button
+            android:id="@+id/button_is_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否已打开蓝牙"
+            android:onClick="onClick"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打开蓝牙"
+            android:onClick="onClick"/>
+
+        <Button
+            android:id="@+id/button_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关闭蓝牙"
+            android:onClick="onClick"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_scan_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索所有设备"
+            android:onClick="onClick"/>
+
+        <Button
+            android:id="@+id/button_stop_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="停止搜索"
+            android:onClick="onClick"/>
+
+        <Button
+            android:id="@+id/button_pair_devices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已配对设备"
+            android:onClick="onClick"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_send_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送消息"
+            android:onClick="onClick"/>
+
+        <Button
+            android:id="@+id/button_read_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="读取消息"
+            android:onClick="onClick"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:lineSpacingExtra="3dp"
+        android:text="结果"/>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+</LinearLayout>
