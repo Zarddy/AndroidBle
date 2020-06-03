@@ -1,7 +1,11 @@
 package club.zarddy.bluetooth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -10,8 +14,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -63,10 +69,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 请求所有权限
+        requestAllPermissions(this);
+
         txtResult = (TextView) findViewById(R.id.txt_result);
         listView = (ListView) findViewById(R.id.list_view);
         bluetoothDeviceListAdapter = new BluetoothDeviceListAdapter(this, bluetoothDeviceList);
         listView.setAdapter(bluetoothDeviceListAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                BluetoothDevice bluetoothDevice = bluetoothDeviceList.get(position);
+                bluetoothDevice.toString();
+            }
+        });
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -230,8 +246,8 @@ public class MainActivity extends AppCompatActivity {
             if (device == null) {
                 continue;
             }
-            if (device.getAddress().contains("78")) {
-//            if (device.getAddress().contains("7D")) {
+//            if (device.getAddress().contains("78")) {
+            if (device.getAddress().contains("7D")) {
                 new ConnectThread(device).start();
             }
         }
@@ -267,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        public void cancle(){
+        public void cancel(){
             try {
                 mServerSocket.close();
             } catch (IOException e) {
@@ -354,14 +370,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
-
-
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_is_support_ble: // 是否支持蓝牙
@@ -405,5 +413,14 @@ public class MainActivity extends AppCompatActivity {
     private void showMessage(String message) {
         txtResult.setText(message);
         LogUtils.i(message);
+    }
+
+    /**
+     * 请求所有权限
+     */
+    public void requestAllPermissions(Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        }
     }
 }

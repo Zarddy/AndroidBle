@@ -2,6 +2,7 @@ package club.zarddy.bluetooth.adapter;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.os.ParcelUuid;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +92,19 @@ public class BluetoothDeviceListAdapter extends BaseAdapter {
             sb.append("\n");
             sb.append("type: " + device.getType());
             sb.append("\n");
-            sb.append("uuid: " + device.getUuids());
+
+            ParcelUuid[] parcelUuids = device.getUuids();
+            if (parcelUuids != null && parcelUuids.length > 0) {
+                for (ParcelUuid uuid : parcelUuids) {
+                    String uuidString = uuid.getUuid().toString();
+                    sb.append("uuid - : " + uuidString);
+                    sb.append("\n");
+                }
+            } else {
+                sb.append("uuid: " + device.getUuids());
+                sb.append("\n");
+            }
+
             return sb.toString();
         }
     }
